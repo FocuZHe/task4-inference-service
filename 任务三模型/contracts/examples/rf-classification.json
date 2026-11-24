@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "shared.rf-classification/1.0",
+  "classificationId": "rf-001",
+  "provenance": {
+    "source": "rf",
+    "deviceId": "rf-01",
+    "observedAt": "2026-10-27T02:00:00Z",
+    "receivedAt": "2026-10-27T02:00:00.100Z",
+    "dataQuality": "ok",
+    "timeQuality": "synchronized",
+    "modelVersion": "rf-1dcnn-v1"
+  },
+  "rfLabel": "drone-control-link",
+  "targetLabel": "drone",
+  "confidence": 0.74,
+  "snrDb": 12.5
+}

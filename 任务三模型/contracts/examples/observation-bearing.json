@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "shared.observation/1.1",
+  "observationId": "obs-eo-bearing-001",
+  "provenance": {
+    "source": "eo",
+    "deviceId": "camera-01",
+    "observedAt": "2026-10-27T02:00:00.040Z",
+    "receivedAt": "2026-10-27T02:00:00.120Z",
+    "dataQuality": "ok",
+    "timeQuality": "synchronized",
+    "modelVersion": "uav-baseline-v1"
+  },
+  "sessionId": "session-001",
+  "frameIndex": 120,
+  "coordinateSystem": "true-north-bearing",
+  "bearingDeg": 41.5,
+  "bearingStdDeg": 1.2,
+  "origin": {"lat": 31.23, "lon": 121.473, "altitudeM": 25.0},
+  "calibrationRef": "camera-01-extrinsic-v1",
+  "quality": 0.8,
+  "detectionId": "det-001"
+}

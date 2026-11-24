@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.quality-job/1.0",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "jobId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Jobid",
+      "type": "string"
+    }
+  },
+  "required": [
+    "jobId"
+  ],
+  "title": "QualityJobAccepted",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cursor/
+.env
+.env.*
+!.env.example
+/runs/
+
+# Published with the repository release.
+/artifacts/onnx/event-rf-v1-fp16.onnx
+/artifacts/onnx/event-rf-v1-fp32.onnx
+/任务三模型/data/raw/konvid-1k/synthetic/full-frame-aligned-v3/models/event-rf.joblib
+/docker/wheels/*.whl

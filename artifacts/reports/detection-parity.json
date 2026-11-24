@@ -1,0 +1,439 @@
+{
+  "rows": [
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 2,
+      "onnxBoxes": 2,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 1e-06
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01709.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 1e-06
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-new",
+      "sample": "02103.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 2,
+      "onnxBoxes": 2,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.4193,
+      "maxConfidenceAbsDiff": 0.000598
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01709.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.3511,
+      "maxConfidenceAbsDiff": 0.000407
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.1725,
+      "maxConfidenceAbsDiff": 0.000119
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.2513,
+      "maxConfidenceAbsDiff": 0.000255
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-new",
+      "sample": "02103.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 2,
+      "onnxBoxes": 2,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.9059,
+      "maxConfidenceAbsDiff": 0.070412
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01709.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.2864,
+      "maxConfidenceAbsDiff": 0.028788
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.4537,
+      "maxConfidenceAbsDiff": 0.002571
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "02103.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01709.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 1e-06
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 3,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 1e-06
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 3,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0003,
+      "maxConfidenceAbsDiff": 1e-06
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0001,
+      "maxConfidenceAbsDiff": 1e-06
+    },
+    {
+      "precision": "fp32",
+      "modelId": "yolo11n-dut-old",
+      "sample": "02103.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01709.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.2969,
+      "maxConfidenceAbsDiff": 0.000455
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 3,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.741,
+      "maxConfidenceAbsDiff": 0.001329
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 3,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.9113,
+      "maxConfidenceAbsDiff": 0.001401
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.2113,
+      "maxConfidenceAbsDiff": 0.001013
+    },
+    {
+      "precision": "fp16",
+      "modelId": "yolo11n-dut-old",
+      "sample": "02103.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01709.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.5179,
+      "maxConfidenceAbsDiff": 0.008248
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 2,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 1704.2619,
+      "maxConfidenceAbsDiff": 0.171474
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 767.1943,
+      "maxConfidenceAbsDiff": 0.132356
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.8244,
+      "maxConfidenceAbsDiff": 0.061469
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "02103.jpg",
+      "pytorchBoxes": 0,
+      "onnxBoxes": 0,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.0,
+      "maxConfidenceAbsDiff": 0.0
+    }
+  ],
+  "errors": [
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-new",
+      "sample": "01576.jpg",
+      "pytorchBoxes": 2,
+      "onnxBoxes": 2,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.9059,
+      "maxConfidenceAbsDiff": 0.070412
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01769.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 2,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 1704.2619,
+      "maxConfidenceAbsDiff": 0.171474
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01816.jpg",
+      "pytorchBoxes": 3,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 767.1943,
+      "maxConfidenceAbsDiff": 0.132356
+    },
+    {
+      "precision": "int8",
+      "modelId": "yolo11n-dut-old",
+      "sample": "01943.jpg",
+      "pytorchBoxes": 1,
+      "onnxBoxes": 1,
+      "classAgreement": 1.0,
+      "maxCenterDistancePx": 0.8244,
+      "maxConfidenceAbsDiff": 0.061469
+    }
+  ],
+  "files": [
+    {
+      "path": "yolo11n-dut-new-fp32.onnx",
+      "sha256": "e5366b821dba6eb229ac9cdc97024b5f5ea52d18390231dc358682dacacf3351",
+      "bytes": 10604532
+    },
+    {
+      "path": "yolo11n-dut-new-fp16.onnx",
+      "sha256": "22500a0fd89d7ad9c60951106b6d6d390bf7bf25dffaf31b2f759b50c06eafe9",
+      "bytes": 5356031
+    },
+    {
+      "path": "yolo11n-dut-new-int8.onnx",
+      "sha256": "041a76eaf6cfb3bbac48dfb189a00b5c57b6c9bb4b8a9f10ff4d68be731a527c",
+      "bytes": 3013733
+    },
+    {
+      "path": "yolo11n-dut-old-fp32.onnx",
+      "sha256": "0e294b5bcc149d7db585f9f481fe4d3b8d717869952c28e9027419bfcbefc5a3",
+      "bytes": 10604502
+    },
+    {
+      "path": "yolo11n-dut-old-fp16.onnx",
+      "sha256": "30af80cf532dbd9a801873647b56fcdaaa7d78aa486a3550d042fde4bfcbfc2f",
+      "bytes": 5356001
+    },
+    {
+      "path": "yolo11n-dut-old-int8.onnx",
+      "sha256": "9c941a0548a803438cb6540d9ad20367d2a8f21e0c33573fd8fbfb633139e36c",
+      "bytes": 3013703
+    }
+  ],
+  "conversionError": {}
+}

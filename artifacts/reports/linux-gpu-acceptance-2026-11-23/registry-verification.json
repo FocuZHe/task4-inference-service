@@ -1,0 +1,47 @@
+{
+  "attempts": 8,
+  "successes": 8,
+  "transactions": [
+    {
+      "family": "detection",
+      "action": "activate",
+      "model": "yolo11n-dut-old"
+    },
+    {
+      "family": "detection",
+      "action": "rollback",
+      "model": "yolo11n-dut-new"
+    },
+    {
+      "family": "detection",
+      "action": "activate",
+      "model": "yolo11n-dut-old"
+    },
+    {
+      "family": "detection",
+      "action": "rollback",
+      "model": "yolo11n-dut-new"
+    },
+    {
+      "family": "detection",
+      "action": "activate",
+      "model": "yolo11n-dut-old"
+    },
+    {
+      "family": "detection",
+      "action": "rollback",
+      "model": "yolo11n-dut-new"
+    },
+    {
+      "family": "quality",
+      "action": "activate",
+      "model": "quality-candidate-v2"
+    },
+    {
+      "family": "quality",
+      "action": "rollback",
+      "model": "quality-ridge-v1"
+    }
+  ],
+  "liveRegistryUnchanged": true
+}

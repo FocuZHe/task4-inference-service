@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "shared.video-quality/1.0",
+  "jobId": "job-001",
+  "videoId": "video-001",
+  "provenance": {
+    "source": "eo",
+    "deviceId": "camera-01",
+    "observedAt": "2026-10-27T02:00:00Z",
+    "receivedAt": "2026-10-27T02:00:00.200Z",
+    "dataQuality": "degraded",
+    "timeQuality": "estimated",
+    "modelVersion": "quality-v1"
+  },
+  "channelType": "visible",
+  "isSynthetic": false,
+  "limitations": [],
+  "scoreStatus": "scored",
+  "qualityScore": 0.61,
+  "anomalies": [
+    {
+      "type": "blur",
+      "startTimeS": 2.0,
+      "endTimeS": 5.0,
+      "status": "confirmed",
+      "evidenceTimeS": 3.0
+    }
+  ],
+  "processingTimeMs": 840
+}

@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "checks": {
+    "接口合同": {
+      "pass": true,
+      "detail": "合同及 API 24/24，现场通过单帧、8 帧、检测视频和画质视频请求"
+    },
+    "PyTorch 与 ONNX 对照": {
+      "pass": true,
+      "detail": "检测固定输入 20 组类别及框数一致，最大中心差 0.000254 px，最大置信度差 1.19e-06。画质固定向量绝对差 4.25e-08"
+    },
+    "单帧 1080p 端到端 P95 ≤ 300 ms": {
+      "pass": true,
+      "detail": "100 次 P50 / P95 / P99 为 60.5 / 64.3 / 67.1 ms"
+    },
+    "8 帧吞吐 ≥ 单帧的 2 倍": {
+      "pass": true,
+      "detail": "36.87 / 16.31 帧/秒 = 2.26 倍"
+    },
+    "连续运行 8 小时": {
+      "pass": true,
+      "detail": "客户端耗时 28800.1 s，2880 次请求，错误 0，未处理异常 0。请求间隔最大 10.0 s。"
+    },
+    "健康检查与故障注入": {
+      "pass": true,
+      "detail": "6 项故障注入通过。覆盖 MODEL_MISSING、INVALID_INPUT、TIMEOUT、QUEUE_FULL、RESOURCE_EXHAUSTED，含独立进程重启验证。资源耗尽由故障注入模拟"
+    },
+    "模型切换及回滚": {
+      "pass": true,
+      "detail": "目标 Linux 容器使用临时注册表执行 8/8 次切换与回滚，覆盖检测与成对画质模型"
+    }
+  },
+  "testCases": 48,
+  "passedTestCases": 48,
+  "soak": {
+    "state": "passed",
+    "startedAt": "2026-11-23T13:02:45.195203+00:00",
+    "finishedAt": "2026-11-23T21:02:48.600210+00:00",
+    "reason": null,
+    "container": [
+      "16d0453e984c80a0f4de6badfb6308b1697d30ebe186b7bbddf0b980e6eec0fe",
+      "2026-11-23T11:47:18.371966559Z",
+      "0",
+      "healthy",
+      "true"
+    ],
+    "clientExitCode": 0,
+    "durationRequestedS": 28800,
+    "clientElapsedSIncludingSetup": 28800.124031462998,
+    "intervalS": 10,
+    "requests": 2880,
+    "errors": 0,
+    "unhandled": 0,
+    "samples": 2811,
+    "p50Ms": 71.38,
+    "p95Ms": 75.581,
+    "p99Ms": 83.6505,
+    "peakSampledGpuUsedMiB": 877,
+    "peakSampledContainerMemoryBytes": 1419595776
+  }
+}

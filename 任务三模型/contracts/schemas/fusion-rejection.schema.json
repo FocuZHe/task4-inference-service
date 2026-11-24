@@ -1,0 +1,81 @@
+{
+  "additionalProperties": false,
+  "description": "A recorded decision not to fuse. The observation itself stays valid.",
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.fusion-rejection/1.0",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "observationId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Observationid",
+      "type": "string"
+    },
+    "reasonCode": {
+      "enum": [
+        "time_invalid",
+        "age_over_15s",
+        "cross_session",
+        "device_fault",
+        "clock_unsynchronized",
+        "calibration_missing",
+        "no_spatial_measurement",
+        "association_ambiguous",
+        "outside_gate",
+        "duplicate_frame",
+        "invalid_radar_flags",
+        "unusable_data"
+      ],
+      "title": "Reasoncode",
+      "type": "string"
+    },
+    "fusionVersion": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Fusionversion",
+      "type": "string"
+    },
+    "detail": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Detail",
+      "type": "string"
+    },
+    "observedAt": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observedat"
+    },
+    "receivedAt": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Receivedat"
+    }
+  },
+  "required": [
+    "observationId",
+    "reasonCode",
+    "fusionVersion",
+    "detail"
+  ],
+  "title": "FusionRejection",
+  "type": "object"
+}

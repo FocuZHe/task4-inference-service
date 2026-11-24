@@ -1,0 +1,309 @@
+{
+  "$defs": {
+    "DataQuality": {
+      "enum": [
+        "ok",
+        "degraded",
+        "unusable",
+        "unknown"
+      ],
+      "title": "DataQuality",
+      "type": "string"
+    },
+    "DeviceStatus": {
+      "enum": [
+        "ok",
+        "fault",
+        "unknown"
+      ],
+      "title": "DeviceStatus",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "description": "Pointer to an immutable raw artifact. Omit the list until the artifact exists.",
+      "properties": {
+        "uri": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "mediaTimeS": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mediatimes"
+        }
+      },
+      "required": [
+        "uri",
+        "sha256"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Fields every task must carry when it emits a result or an observation.",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/SourceModality"
+        },
+        "deviceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Deviceid",
+          "type": "string"
+        },
+        "observedAt": {
+          "format": "date-time",
+          "title": "Observedat",
+          "type": "string"
+        },
+        "receivedAt": {
+          "format": "date-time",
+          "title": "Receivedat",
+          "type": "string"
+        },
+        "dataQuality": {
+          "$ref": "#/$defs/DataQuality"
+        },
+        "timeQuality": {
+          "$ref": "#/$defs/TimeQuality"
+        },
+        "modelVersion": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Modelversion"
+        },
+        "deviceStatus": {
+          "$ref": "#/$defs/DeviceStatus",
+          "default": "unknown"
+        },
+        "siteId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Siteid"
+        },
+        "channelId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Channelid"
+        },
+        "clockOffsetMs": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clockoffsetms"
+        },
+        "evidenceRefs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidencerefs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source",
+        "deviceId",
+        "observedAt",
+        "receivedAt",
+        "dataQuality",
+        "timeQuality"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "SourceModality": {
+      "enum": [
+        "radar",
+        "rf",
+        "eo"
+      ],
+      "title": "SourceModality",
+      "type": "string"
+    },
+    "TargetLabel": {
+      "enum": [
+        "drone",
+        "bird",
+        "aircraft",
+        "unknown"
+      ],
+      "title": "TargetLabel",
+      "type": "string"
+    },
+    "TimeQuality": {
+      "enum": [
+        "synchronized",
+        "estimated",
+        "unsynchronized",
+        "unknown"
+      ],
+      "title": "TimeQuality",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Task 1 photoelectric detection. A box is not a geographic position.",
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.detection/1.1",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "detectionId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Detectionid",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "frameIndex": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frameindex"
+    },
+    "videoId": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Videoid"
+    },
+    "mediaTimeS": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mediatimes"
+    },
+    "imageWidth": {
+      "exclusiveMinimum": 0,
+      "title": "Imagewidth",
+      "type": "integer"
+    },
+    "imageHeight": {
+      "exclusiveMinimum": 0,
+      "title": "Imageheight",
+      "type": "integer"
+    },
+    "bboxXyxy": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Bboxxyxy",
+      "type": "array"
+    },
+    "label": {
+      "$ref": "#/$defs/TargetLabel"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "classProbabilities": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Classprobabilities"
+    },
+    "labelConfirmed": {
+      "default": false,
+      "title": "Labelconfirmed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "detectionId",
+    "provenance",
+    "imageWidth",
+    "imageHeight",
+    "bboxXyxy",
+    "label",
+    "confidence"
+  ],
+  "title": "Detection",
+  "type": "object"
+}

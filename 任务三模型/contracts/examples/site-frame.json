@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "shared.site-frame/1.0",
+  "siteId": "site-001",
+  "frameId": "site-enu-v1",
+  "origin": {"lat": 31.23, "lon": 121.473, "altitudeM": 12.0},
+  "calibrationStatus": "calibrated",
+  "calibrationRef": "site-survey-2026-10"
+}

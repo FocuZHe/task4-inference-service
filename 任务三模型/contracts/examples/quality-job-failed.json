@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "shared.quality-job-status/1.0",
+  "jobId": "job-002",
+  "state": "failed",
+  "error": {
+    "code": "corrupt",
+    "message": "The container has no decodable frames."
+  }
+}

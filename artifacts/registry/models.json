@@ -1,0 +1,128 @@
+{
+  "models": [
+    {
+      "modelId": "yolo11n-dut-new",
+      "family": "detection",
+      "role": "active",
+      "profile": "current",
+      "path": "任务一模型/demo/models/new.pt",
+      "sha256": "6943154d93a8b795f8ef03e1942e0597781a0b65d84259d9fa82006b43c5411e",
+      "format": "pt",
+      "trainingSource": "DUT-Anti-UAV dut-finetune-100epoch-001",
+      "inputSize": 640,
+      "classes": {
+        "raw": ["uav"],
+        "service": ["drone"]
+      },
+      "rollbackTo": "yolo11n-dut-old"
+    },
+    {
+      "modelId": "yolo11n-dut-old",
+      "family": "detection",
+      "role": "rollback",
+      "profile": "previous",
+      "path": "任务一模型/demo/models/old.pt",
+      "sha256": "8ceec0195fb31c63a1a49077aead56a6b79723ed5a4c0004e627c2fa88b7233a",
+      "format": "pt",
+      "trainingSource": "DUT-Anti-UAV dut-1epoch",
+      "inputSize": 640,
+      "classes": {
+        "raw": ["uav"],
+        "service": ["drone"]
+      },
+      "rollbackTo": "yolo11n-dut-new"
+    },
+    {
+      "modelId": "quality-ridge-v1",
+      "family": "quality",
+      "role": "active",
+      "profile": "baseline",
+      "path": "任务三模型/data/raw/konvid-1k/models-official/quality_ridge.joblib",
+      "sha256": "1cbb8558e01aecaa57d01a80cc578618fdf61ada2d0ac1164fe714aa4f87e535",
+      "format": "joblib",
+      "trainingSource": "KoNViD-1k official MOS ridge-v1",
+      "inputSize": 6,
+      "classes": {
+        "features": [
+          "lap_var_mean",
+          "luma_mean",
+          "dark_ratio_mean",
+          "bright_ratio_mean",
+          "contrast_mean",
+          "frame_diff_mean"
+        ],
+        "events": ["blur", "dark", "overexposed", "freeze_suspected"]
+      },
+      "rollbackTo": "quality-candidate-v2"
+    },
+    {
+      "modelId": "event-rf-v1",
+      "family": "quality",
+      "role": "active",
+      "profile": "baseline",
+      "path": "任务三模型/data/raw/konvid-1k/synthetic/full-frame-aligned-v3/models/event-rf.joblib",
+      "sha256": "7ff590c07a66042ffd42233391a213aefdd37d8e01446258fe147412658a9e1e",
+      "format": "joblib",
+      "trainingSource": "controlled distortions task3-event-rf-v1",
+      "inputSize": 6,
+      "classes": {
+        "features": [
+          "luma_mean",
+          "luma_std",
+          "dark_ratio",
+          "bright_ratio",
+          "lap_var",
+          "frame_diff"
+        ],
+        "events": ["blur", "dark", "overexposed", "freeze_suspected"]
+      },
+      "rollbackTo": "event-candidate-v2"
+    },
+    {
+      "modelId": "quality-candidate-v2",
+      "family": "quality",
+      "role": "rollback",
+      "profile": "candidate-v2",
+      "path": "任务三模型/data/raw/konvid-1k/candidate-v2/quality_candidate.joblib",
+      "sha256": "0b9e3316d63d6a88fb3cedebee945c7611fef7635aa6d84259c24687e9e6996f",
+      "format": "joblib",
+      "trainingSource": "KoNViD-1k hist_iter_100_leaf_7_l2_1-candidate-v2",
+      "inputSize": 6,
+      "classes": {
+        "features": [
+          "lap_var_mean",
+          "luma_mean",
+          "dark_ratio_mean",
+          "bright_ratio_mean",
+          "contrast_mean",
+          "frame_diff_mean"
+        ],
+        "events": ["blur", "dark", "overexposed", "freeze_suspected"]
+      },
+      "rollbackTo": "quality-ridge-v1"
+    },
+    {
+      "modelId": "event-candidate-v2",
+      "family": "quality",
+      "role": "rollback",
+      "profile": "candidate-v2",
+      "path": "任务三模型/data/raw/konvid-1k/candidate-v2/events/event-v2-candidate.joblib",
+      "sha256": "72304ed01a07520bb5c281c466c5e430dfb8389d30c92a0bebd4d029e0211363",
+      "format": "joblib",
+      "trainingSource": "controlled distortions hgb_160_leaf_7_lr_0.05-candidate-v2",
+      "inputSize": 6,
+      "classes": {
+        "features": [
+          "luma_mean",
+          "luma_std",
+          "dark_ratio",
+          "bright_ratio",
+          "lap_var",
+          "frame_diff"
+        ],
+        "events": ["blur", "dark", "overexposed", "freeze_suspected"]
+      },
+      "rollbackTo": "event-rf-v1"
+    }
+  ]
+}

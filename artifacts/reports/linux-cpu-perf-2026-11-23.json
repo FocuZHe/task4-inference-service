@@ -1,0 +1,472 @@
+{
+  "date": "2026-11-23",
+  "host": "192.168.153.223",
+  "stageDirectory": "/var/tmp/task4-cpu-perf.JPOPY3E5",
+  "scope": {
+    "network": "none",
+    "memoryGiB": 4,
+    "numaNode": 1,
+    "mountedInputs": "read-only test assets",
+    "baseImageId": "sha256:e67db9b14d098500c534b3acb73f5503fad7eed29720b8870d12dadb98ae245b",
+    "onnxruntime": "1.26.0",
+    "pybase64": "1.5.1 for the selected code",
+    "requestsPerMode": 100,
+    "fixtureFrames": 40,
+    "containersRemoved": true
+  },
+  "acceptance": {
+    "throughput": "batch frames per second / single frames per second >= 2",
+    "p95AndP99": "8 * single request latency / batch request latency >= 2 at the same percentile",
+    "singleFrameP95MaxMs": 300,
+    "allSpeedupsPassed": false
+  },
+  "testedSourceFiles": {
+    "serving/detection_runtime.py": "ad83a1c4c52e3e30efb6f7450c42941eda46d604e70f85532b1d017b9e49b77c",
+    "serving/inference.py": "7ea9328a9fb4e9b4188deb3fea2542c3191ca6e72a3794ee340e618f9dd6689b",
+    "serving/image_decode.py": "81c5e0c3dbce80c9ffb506086e50e9a5f67f911f159e8cf73ac4da95e66664cf"
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "logicalCpus": 4,
+      "httpParser": "h11",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 64.0374,
+        "p95Ms": 95.7082,
+        "p99Ms": 100.7592,
+        "serverP50Ms": 55.88,
+        "serverP95Ms": 82.0255,
+        "serverP99Ms": 84.7971,
+        "throughputPerS": 13.4168,
+        "queueWaitP95Ms": 13.5298,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 1226915840,
+        "gpuBytes": 0,
+        "batch8Throughput": 23.7419,
+        "singleThroughput": 13.4168,
+        "batchThroughputRatio": 1.7696,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 2.12,
+        "batchP99Speedup": 2.0887,
+        "batchP95SpeedupPass": true,
+        "batchP99SpeedupPass": true,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 361.1607,
+        "batchP99Ms": 385.925
+      }
+    },
+    {
+      "variant": "baseline",
+      "logicalCpus": 8,
+      "httpParser": "h11",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 59.0793,
+        "p95Ms": 69.0615,
+        "p99Ms": 69.5736,
+        "serverP50Ms": 51.055,
+        "serverP95Ms": 59.6335,
+        "serverP99Ms": 60.2045,
+        "throughputPerS": 16.2025,
+        "queueWaitP95Ms": 9.4811,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 1229135872,
+        "gpuBytes": 0,
+        "batch8Throughput": 27.2951,
+        "singleThroughput": 16.2025,
+        "batchThroughputRatio": 1.6846,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 1.7028,
+        "batchP99Speedup": 1.6355,
+        "batchP95SpeedupPass": false,
+        "batchP99SpeedupPass": false,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 324.4646,
+        "batchP99Ms": 340.3265
+      }
+    },
+    {
+      "variant": "baseline",
+      "logicalCpus": 12,
+      "httpParser": "h11",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 69.9685,
+        "p95Ms": 84.467,
+        "p99Ms": 99.2577,
+        "serverP50Ms": 60.445,
+        "serverP95Ms": 75.8175,
+        "serverP99Ms": 90.7877,
+        "throughputPerS": 14.2448,
+        "queueWaitP95Ms": 11.9767,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 1229373440,
+        "gpuBytes": 0,
+        "batch8Throughput": 24.6216,
+        "singleThroughput": 14.2448,
+        "batchThroughputRatio": 1.7285,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 1.832,
+        "batchP99Speedup": 2.1048,
+        "batchP95SpeedupPass": false,
+        "batchP99SpeedupPass": true,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 368.8555,
+        "batchP99Ms": 377.265
+      }
+    },
+    {
+      "variant": "shared-session experiment",
+      "logicalCpus": 8,
+      "httpParser": "h11",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 58.8001,
+        "p95Ms": 90.3066,
+        "p99Ms": 101.8487,
+        "serverP50Ms": 50.58,
+        "serverP95Ms": 77.7365,
+        "serverP99Ms": 84.8005,
+        "throughputPerS": 15.0586,
+        "queueWaitP95Ms": 14.1456,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 886181888,
+        "gpuBytes": 0,
+        "batch8Throughput": 26.5455,
+        "singleThroughput": 15.0586,
+        "batchThroughputRatio": 1.7628,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 2.2268,
+        "batchP99Speedup": 2.4571,
+        "batchP95SpeedupPass": true,
+        "batchP99SpeedupPass": true,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 324.4314,
+        "batchP99Ms": 331.6069
+      }
+    },
+    {
+      "variant": "selected code",
+      "logicalCpus": 12,
+      "httpParser": "h11",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 53.0205,
+        "p95Ms": 69.0993,
+        "p99Ms": 75.9472,
+        "serverP50Ms": 44.87,
+        "serverP95Ms": 58.51,
+        "serverP99Ms": 67.8614,
+        "throughputPerS": 17.8137,
+        "queueWaitP95Ms": 9.3312,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 1183870976,
+        "gpuBytes": 0,
+        "batch8Throughput": 29.1719,
+        "singleThroughput": 17.8137,
+        "batchThroughputRatio": 1.6376,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 1.7666,
+        "batchP99Speedup": 1.8636,
+        "batchP95SpeedupPass": false,
+        "batchP99SpeedupPass": false,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 312.9076,
+        "batchP99Ms": 326.0257
+      }
+    },
+    {
+      "variant": "native HTTP parser experiment",
+      "logicalCpus": 16,
+      "httpParser": "httptools",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 50.8284,
+        "p95Ms": 60.8524,
+        "p99Ms": 72.9117,
+        "serverP50Ms": 43.275,
+        "serverP95Ms": 51.1135,
+        "serverP99Ms": 65.3874,
+        "throughputPerS": 18.6758,
+        "queueWaitP95Ms": 9.3852,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 1185206272,
+        "gpuBytes": 0,
+        "batch8Throughput": 24.8274,
+        "singleThroughput": 18.6758,
+        "batchThroughputRatio": 1.3294,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 1.4087,
+        "batchP99Speedup": 1.6561,
+        "batchP95SpeedupPass": false,
+        "batchP99SpeedupPass": false,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 345.5697,
+        "batchP99Ms": 352.1995,
+        "batchServerP95Ms": 216.364,
+        "batchServerP99Ms": 229.3892
+      }
+    },
+    {
+      "variant": "selected code",
+      "logicalCpus": 16,
+      "httpParser": "h11",
+      "metrics": {
+        "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+        "fixtureFrames": 40,
+        "distinctInputFrames": 40,
+        "width": 1920,
+        "height": 1080,
+        "requests": 100,
+        "batchSize": 8,
+        "p50Ms": 52.3482,
+        "p95Ms": 60.2431,
+        "p99Ms": 61.2346,
+        "serverP50Ms": 44.025,
+        "serverP95Ms": 50.9615,
+        "serverP99Ms": 51.9935,
+        "throughputPerS": 18.3825,
+        "queueWaitP95Ms": 10.1022,
+        "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+        "errorRate": 0.0,
+        "rssBytes": 1181757440,
+        "gpuBytes": 0,
+        "batch8Throughput": 24.1292,
+        "singleThroughput": 18.3825,
+        "batchThroughputRatio": 1.3126,
+        "singleFrameP95Pass": true,
+        "batchThroughputPass": false,
+        "batchP95Speedup": 1.3571,
+        "batchP99Speedup": 1.3697,
+        "batchP95SpeedupPass": false,
+        "batchP99SpeedupPass": false,
+        "enabledMeans": [
+          "imgsz 640",
+          "POST /infer/batch",
+          "JPEG and PNG dimensions read from the header",
+          "benchmark client reuses one HTTP connection",
+          "orjson for the 8-frame JSON body"
+        ],
+        "batchErrorRate": 0.0,
+        "batchP95Ms": 355.1295,
+        "batchP99Ms": 357.6631,
+        "batchServerP95Ms": 214.518,
+        "batchServerP99Ms": 225.6194
+      }
+    }
+  ],
+  "cpuProfile": [
+    {
+      "decodeOnlyP50P95Ms": [
+        36.42,
+        38.42
+      ]
+    },
+    {
+      "singleThreads": 1,
+      "p50p95Ms": [
+        99.92,
+        137.49
+      ]
+    },
+    {
+      "singleThreads": 2,
+      "p50p95Ms": [
+        120.83,
+        123.79
+      ]
+    },
+    {
+      "singleThreads": 4,
+      "p50p95Ms": [
+        90.17,
+        90.93
+      ]
+    },
+    {
+      "singleThreads": 6,
+      "p50p95Ms": [
+        78.65,
+        79.65
+      ]
+    },
+    {
+      "singleThreads": 8,
+      "p50p95Ms": [
+        71.74,
+        72.35
+      ]
+    },
+    {
+      "singleThreads": 12,
+      "p50p95Ms": [
+        66.7,
+        67.67
+      ]
+    },
+    {
+      "workers": 8,
+      "threads": 1,
+      "shared": true,
+      "p50p95Ms": [
+        231.23,
+        238.26
+      ]
+    },
+    {
+      "workers": 8,
+      "threads": 1,
+      "shared": false,
+      "p50p95Ms": [
+        208.25,
+        211.2
+      ]
+    },
+    {
+      "workers": 6,
+      "threads": 2,
+      "shared": false,
+      "p50p95Ms": [
+        306.89,
+        321.86
+      ]
+    },
+    {
+      "workers": 4,
+      "threads": 3,
+      "shared": false,
+      "p50p95Ms": [
+        281.96,
+        293.17
+      ]
+    },
+    {
+      "workers": 8,
+      "threads": 2,
+      "shared": false,
+      "p50p95Ms": [
+        193.43,
+        201.74
+      ]
+    },
+    {
+      "workers": 4,
+      "threads": 2,
+      "shared": false,
+      "p50p95Ms": [
+        320.1,
+        342.19
+      ]
+    },
+    {
+      "workers": 8,
+      "threads": 2,
+      "shared": true,
+      "p50p95Ms": [
+        241.23,
+        266.91
+      ]
+    }
+  ],
+  "selected": {
+    "logicalCpus": 12,
+    "batchThroughputChangePercent": 18.48,
+    "batchP95ChangePercent": -15.17,
+    "batchP99ChangePercent": -13.58
+  },
+  "dynamicBatchExperiment": {
+    "sampleParityCount": 6,
+    "result": "No material gain on the local CPU. Existing ONNX retained."
+  }
+}

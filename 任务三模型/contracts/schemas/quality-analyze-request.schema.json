@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.quality-job/1.0",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "videoId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Videoid",
+      "type": "string"
+    }
+  },
+  "required": [
+    "videoId"
+  ],
+  "title": "QualityAnalyzeRequest",
+  "type": "object"
+}

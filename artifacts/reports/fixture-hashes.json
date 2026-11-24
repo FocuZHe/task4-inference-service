@@ -1,0 +1,11 @@
+{
+  "ten-second-1080p.mp4": {
+    "sha256": "7d81e59fd4c94ae31d52adea0475a6b2e092cadaabbea7769d467bb40af09172",
+    "width": 1920,
+    "height": 1080,
+    "frames": 250,
+    "fps": 25.0,
+    "seed": 42,
+    "purpose": "latency-and-interface-only"
+  }
+}

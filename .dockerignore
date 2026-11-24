@@ -1,0 +1,7 @@
+.venv-task4
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.git
+任务一模型
+任务三模型

@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-23",
+  "host": "192.168.153.223",
+  "stageDirectory": "/var/tmp/task4-gpu-stage.V1NoJjEe",
+  "scope": "Isolated CUDA batching prototype; fixed test assets",
+  "hardware": {
+    "gpuIndex": 0,
+    "gpuUuid": "GPU-0ce41810-22bc-11f5-9a09-73af03b705b5",
+    "gpuName": "NVIDIA GeForce RTX 3090",
+    "driverVersion": "595.99.02",
+    "cpuAffinity": "88-95",
+    "numaNode": 0
+  },
+  "runtime": {
+    "onnxruntime": "1.26.0",
+    "cuda": "12.8 Update 1",
+    "cudnn": "9.10.2.21",
+    "precision": "FP32, TF32 disabled",
+    "batchModelSha256": "953aa1c0764b4e7aa0378bb6454ad410e84f125a9d10e8949d1e181646c886fd",
+    "batchMethod": "One ONNX Runtime call for eight input tensors",
+    "batchWarmupBeforeReadyS": 1.711,
+    "requestTimeoutS": 2
+  },
+  "isolation": {
+    "network": "none",
+    "ports": {},
+    "deviceRequests": [
+      {
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Count": 0,
+        "DeviceIDs": [
+          "GPU-0ce41810-22bc-11f5-9a09-73af03b705b5"
+        ],
+        "Driver": "",
+        "Options": {}
+      }
+    ],
+    "user": "10001:10001",
+    "readOnly": true,
+    "cpuQuota": 8000000000,
+    "memoryBytes": 4294967296
+  },
+  "firstColdAttempt": {
+    "batchError": "HTTP 408 Request Timeout",
+    "resolution": "Warm the batch-8 shape before advertising readiness"
+  },
+  "parity": {
+    "images": 8,
+    "nonEmptyImages": 4,
+    "boxes": 5,
+    "classAgreement": true,
+    "maxAllowedBoxCoordinateGapPx": 1,
+    "maxAllowedConfidenceGap": 0.05
+  },
+  "short": {
+    "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+    "fixtureFrames": 40,
+    "distinctInputFrames": 40,
+    "width": 1920,
+    "height": 1080,
+    "requests": 20,
+    "batchSize": 8,
+    "p50Ms": 61.5575,
+    "p95Ms": 66.3282,
+    "p99Ms": 72.6533,
+    "serverP50Ms": 39.17,
+    "serverP95Ms": 44.5,
+    "serverP99Ms": 51.34,
+    "throughputPerS": 16.0448,
+    "queueWaitP95Ms": 22.6434,
+    "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+    "errorRate": 0.0,
+    "rssBytes": 1614602240,
+    "gpuBytes": 829423616,
+    "batch8Throughput": 36.5238,
+    "singleThroughput": 16.0448,
+    "batchThroughputRatio": 2.2764,
+    "singleFrameP95Pass": true,
+    "batchThroughputPass": true,
+    "batchP95Speedup": 2.2152,
+    "batchP99Speedup": 2.3561,
+    "batchP95SpeedupPass": true,
+    "batchP99SpeedupPass": true,
+    "enabledMeans": [
+      "imgsz 640",
+      "POST /infer/batch",
+      "JPEG and PNG dimensions read from the header",
+      "benchmark client reuses one HTTP connection",
+      "orjson for the 8-frame JSON body"
+    ],
+    "batchErrorRate": 0.0,
+    "batchP95Ms": 239.5352,
+    "batchP99Ms": 246.6899,
+    "batchServerP95Ms": 105.664,
+    "batchServerP99Ms": 106.7888
+  },
+  "full": {
+    "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+    "fixtureFrames": 40,
+    "distinctInputFrames": 40,
+    "width": 1920,
+    "height": 1080,
+    "requests": 100,
+    "batchSize": 8,
+    "p50Ms": 56.151,
+    "p95Ms": 58.3675,
+    "p99Ms": 60.6817,
+    "serverP50Ms": 38.37,
+    "serverP95Ms": 39.9455,
+    "serverP99Ms": 43.1186,
+    "throughputPerS": 17.6648,
+    "queueWaitP95Ms": 18.6398,
+    "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+    "errorRate": 0.0,
+    "rssBytes": 1618087936,
+    "gpuBytes": 829423616,
+    "batch8Throughput": 36.9282,
+    "singleThroughput": 17.6648,
+    "batchThroughputRatio": 2.0905,
+    "singleFrameP95Pass": true,
+    "batchThroughputPass": true,
+    "batchP95Speedup": 1.9575,
+    "batchP99Speedup": 1.9149,
+    "batchP95SpeedupPass": false,
+    "batchP99SpeedupPass": false,
+    "enabledMeans": [
+      "imgsz 640",
+      "POST /infer/batch",
+      "JPEG and PNG dimensions read from the header",
+      "benchmark client reuses one HTTP connection",
+      "orjson for the 8-frame JSON body"
+    ],
+    "batchErrorRate": 0.0,
+    "batchP95Ms": 238.5352,
+    "batchP99Ms": 253.5176,
+    "batchServerP95Ms": 100.1955,
+    "batchServerP99Ms": 115.4256
+  },
+  "gpuGuard": {
+    "status": [
+      "Started with no concurrent GPU 0 compute processes",
+      "Guard completed without a competing process"
+    ],
+    "samples": 38,
+    "peakSampledUsedMiB": 791,
+    "memoryUsedAfterCleanupMiB": 129,
+    "activeComputeProcessesAfterCleanup": 0,
+    "containerRemoved": true
+  },
+  "exit": {
+    "ExitCode": 0,
+    "OOMKilled": false,
+    "StartedAt": "2026-11-23T10:58:54.238123106Z",
+    "FinishedAt": "2026-11-23T10:59:44.451296256Z"
+  }
+}

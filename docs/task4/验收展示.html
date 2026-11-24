@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>任务四验收展示</title>
+<style>
+  :root {
+    --paper: #f4efe6;
+    --ink: #1b1714;
+    --muted: #5e564c;
+    --line: #d4cbbd;
+    --pass: #1d6b45;
+    --pass-bg: #e5f2ea;
+    --note: #8a4b12;
+    --note-bg: #f8efe4;
+    --rail: #ebe4d8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Palatino Linotype", Palatino, "Songti SC", "Noto Serif SC", serif;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100%;
+  }
+  nav {
+    background: var(--rail);
+    border-right: 1px solid var(--line);
+    padding: 28px 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+  nav .mark {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin: 0 8px 12px;
+  }
+  nav h1 {
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 600;
+    margin: 0 8px 4px;
+  }
+  nav .date {
+    margin: 0 8px 18px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  nav button {
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-left: 3px solid transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  nav button[aria-current="true"] {
+    border-left-color: var(--pass);
+    background: #f7f3eb;
+    font-weight: 600;
+  }
+  nav .hint {
+    margin-top: auto;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 8px;
+  }
+  main {
+    padding: 48px 64px 40px;
+    max-width: 980px;
+  }
+  section { display: none; }
+  section.active { display: block; }
+  .kicker {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 0 0 18px;
+  }
+  .figure {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin: 8px 0 18px;
+  }
+  .pass {
+    display: inline-block;
+    background: var(--pass-bg);
+    color: var(--pass);
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 14px;
+    padding: 4px 8px;
+    margin-bottom: 16px;
+  }
+  .note {
+    background: var(--note-bg);
+    color: var(--note);
+    padding: 12px 14px;
+    margin: 16px 0;
+  }
+  p { font-size: 20px; line-height: 1.55; margin: 0 0 14px; }
+  .src {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 14px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin-top: 22px;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    vertical-align: top;
+  }
+  th { color: var(--muted); font-weight: 600; }
+  .bar {
+    height: 14px;
+    background: #e4dcd0;
+    margin: 8px 0 18px;
+    position: relative;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    background: var(--pass);
+  }
+  .bar .cap {
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    width: 2px;
+    background: var(--ink);
+  }
+  pre {
+    background: #1b1714;
+    color: #f4efe6;
+    padding: 16px 18px;
+    overflow: auto;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+  .chip {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .stage {
+    position: relative;
+    width: min(100%, 860px);
+    background: #111;
+    overflow: hidden;
+  }
+  .stage img { display: block; width: 100%; height: auto; }
+  .stage .box {
+    position: absolute;
+    border: 2px solid #e8ff57;
+    box-shadow: 0 0 0 1px #111;
+  }
+  .stage .box span {
+    position: absolute;
+    left: 0;
+    top: -18px;
+    background: #e8ff57;
+    color: #111;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 12px;
+    padding: 0 4px;
+    white-space: nowrap;
+  }
+  .stage.zoom { transform: scale(2.4); transform-origin: var(--ox) var(--oy); }
+  .stage-clip { overflow: hidden; width: min(100%, 860px); }
+  svg.spark { width: 100%; height: 160px; background: #1b1714; }
+  svg.spark polyline { fill: none; stroke: #e8ff57; stroke-width: 2; }
+  .meters { display: grid; gap: 10px; margin: 12px 0 18px; }
+  .meter { display: grid; grid-template-columns: 92px 1fr 88px; gap: 10px; align-items: center; font-family: "Cascadia Mono", Consolas, monospace; font-size: 14px; width: 100%; background: transparent; border: 0; color: inherit; text-align: left; padding: 0; }
+  button.meter { cursor: pointer; }
+  button.meter[aria-pressed="true"] .fill { outline: 2px solid var(--ink); }
+  .meter .track { height: 18px; background: #e4dcd0; }
+  .meter .fill { height: 100%; background: var(--pass); }
+  .meter .fill.warn { background: var(--note); }
+  @media (max-width: 860px) {
+    body { grid-template-columns: 1fr; }
+    nav { position: relative; height: auto; }
+    main { padding: 28px 20px 48px; }
+    h2 { font-size: 32px; }
+    .figure { font-size: 42px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <p class="mark">验收现场</p>
+  <h1>任务四</h1>
+  <p class="date">2026-11-18</p>
+  <button type="button" data-go="0">封面</button>
+  <button type="button" data-go="1">1 合同</button>
+  <button type="button" data-go="2">2 导出对照</button>
+  <button type="button" data-go="3">3 延迟与吞吐</button>
+  <button type="button" data-go="4">4 八小时</button>
+  <button type="button" data-go="5">5 故障</button>
+  <button type="button" data-go="6">6 切换与回滚</button>
+  <button type="button" data-go="7">7 部署</button>
+  <button type="button" data-go="8">样例框</button>
+  <p class="hint">方向键切换。数字来自 artifacts/reports，不是现场重算的精度。</p>
+</nav>
+<main>
+  <section data-panel="0" class="active">
+    <p class="kicker">算法服务化与推理优化</p>
+    <h2>七项建议指标都已达到</h2>
+    <p class="pass">7 / 7</p>
+    <p>把任务一的检测权重和任务三的画质权重做成可测量、可部署的 Python 服务。夹具只用于接口和性能，不改写识别精度。</p>
+    <table>
+      <tr><th>指标</th><th>结果</th></tr>
+      <tr><td>合同测试</td><td>通过</td></tr>
+      <tr><td>FP32 类别一致 / 分数差</td><td>1.0　/　4.25e-8</td></tr>
+      <tr><td>1080p 端到端 P95</td><td>140.6 ms，上限 300 ms</td></tr>
+      <tr><td>8 帧吞吐 / 单帧</td><td>2.4324，重复测量最低 2.409</td></tr>
+      <tr><td>8 小时</td><td>2880 次，退出码 0</td></tr>
+      <tr><td>故障码</td><td>6 项测试通过</td></tr>
+      <tr><td>切换与回滚</td><td>1.0</td></tr>
+    </table>
+    <p class="src">总表：artifacts/reports/task4-acceptance.md</p>
+  </section>
+
+  <section data-panel="1">
+    <p class="kicker">01　接口合同</p>
+    <h2>每次响应都带这七个字段</h2>
+    <p class="pass">合同测试通过</p>
+    <p>检测类别 <code>uav</code> 在服务里写成 <code>drone</code>。<code>receivedAt</code> 带时区。<code>source</code> 固定为 <code>eo</code>。多出来的字段会被拒绝。</p>
+    <pre>{
+  "requestId": "req-1",
+  "modelVersion": "yolo11n-dut-new",
+  "source": "eo",
+  "receivedAt": "2026-11-18T00:00:00+00:00",
+  "result": { "boxes": [] },
+  "latencyMs": 82.3,
+  "errorCode": null
+}</pre>
+    <p class="src">tests/test_contracts.py　·　tests/test_api.py　·　serving/contracts.py</p>
+  </section>
+
+  <section data-panel="2">
+    <p class="kicker">02　导出对照</p>
+    <h2>FP32 保持了原来的结果</h2>
+    <p class="figure">1.0</p>
+    <p>检测：6 张样例、new 和 old 两个模型，PyTorch 与 FP32 ONNX 的类别一致率都是 1.0。画质：固定向量上 joblib 与 FP32 ONNX 的绝对差是 4.25e-8。10 秒冒烟视频的归一化画质分绝对差是 3.38e-8。</p>
+    <p>画质固定向量，joblib 与 ONNX 并排。点按钮切换对照项。</p>
+    <div class="row" id="quality-switch">
+      <button type="button" class="chip" data-q="vector" aria-pressed="true">固定向量</button>
+      <button type="button" class="chip" data-q="smoke" aria-pressed="false">冒烟视频</button>
+      <button type="button" class="chip" data-q="int8" aria-pressed="false">Ridge INT8</button>
+    </div>
+    <div class="meters" id="quality-meters"></div>
+    <p class="note">这些数字只说明导出后数值还在，不表示识别精度或画质相关指标提高。任务一 mAP、任务三 SRCC 仍用原先交付记录，本次没有重算。</p>
+    <p class="src">artifacts/reports/detection-parity.json　·　artifacts/reports/quality-parity.json</p>
+  </section>
+
+  <section data-panel="3">
+    <p class="kicker">03　延迟与吞吐</p>
+    <h2>P95 低于 300 ms，批量超过 2 倍</h2>
+    <p class="figure">140.6 ms</p>
+    <p>100 次 1080p 单帧的端到端延迟。竖线是 300 ms 上限。点一行可看它占上限的比例。</p>
+    <div class="meters" id="latency-meters"></div>
+    <p id="latency-readout">点上面某一行。</p>
+    <p>P50 / P95 / P99 = 107.13 / 140.5512 / 627.4662 ms。P99 有一次单帧尖峰，验收看的是 P95。错误率 0。显存 0，机器没有 NVIDIA GPU。</p>
+    <div class="meters" id="throughput-meters"></div>
+    <p class="figure">2.43×</p>
+    <p>8 帧吞吐 19.7499 帧/秒，单帧 8.1195 帧/秒，比值 2.4324。另外 6 组各 30 次，最低 2.409。单帧最快到 8.947 帧/秒时，比值仍是 2.805。复用连接和每次新开连接都过 2 倍。</p>
+    <p class="src">artifacts/reports/latency.json　·　100 次请求　·　ten-second-1080p.mp4 第一帧</p>
+  </section>
+
+  <section data-panel="4">
+    <p class="kicker">04　八小时</p>
+    <h2>2880 次请求，进程正常结束</h2>
+    <p class="figure">8 h</p>
+    <p class="pass">退出码 0　·　unhandled = 0</p>
+    <p>从 2026-11-17 19:14:29 UTC 到 2026-11-18 03:14:21 UTC，每 10 秒提交一次同一张 1920×1080 帧。末次请求号 soak-2880，状态 200，耗时 28,804,346 ms。</p>
+    <p>下面是客户端耗时，每 36 次取 1 个点，共 80 个点。把鼠标移到曲线上可看该点毫秒数。</p>
+    <svg class="spark" id="soak-chart" viewBox="0 0 800 160" role="img" aria-label="八小时客户端耗时"></svg>
+    <p id="soak-readout">移到曲线上查看。</p>
+    <p class="note">这是稳定性测试，重复的是同一帧，不是在覆盖更多视频内容。</p>
+    <p class="src">artifacts/reports/soak.jsonl　·　首行 soak-1　·　末行 soak-2880</p>
+  </section>
+
+  <section data-panel="5">
+    <p class="kicker">05　故障</p>
+    <h2>六种故障都返回明确错误码</h2>
+    <p class="pass">tests/test_faults.py　6 passed</p>
+    <table>
+      <tr><th>场景</th><th>errorCode</th><th>HTTP</th></tr>
+      <tr><td>输入损坏</td><td>INVALID_INPUT</td><td>400</td></tr>
+      <tr><td>模型缺失</td><td>MODEL_MISSING</td><td>503</td></tr>
+      <tr><td>超时</td><td>TIMEOUT</td><td>408</td></tr>
+      <tr><td>内存错误</td><td>RESOURCE_EXHAUSTED</td><td>500</td></tr>
+      <tr><td>队列满</td><td>QUEUE_FULL</td><td>503</td></tr>
+      <tr><td>服务重启后的健康检查</td><td>健康与就绪可再次返回</td><td>200</td></tr>
+    </table>
+    <p>本机没有 NVIDIA 显存。显存不足这条用内存错误代替，返回 RESOURCE_EXHAUSTED。</p>
+    <p class="src">tests/test_faults.py　·　serving/health.py</p>
+  </section>
+
+  <section data-panel="6">
+    <p class="kicker">06　切换与回滚</p>
+    <h2>切换和回滚成功率是 1.0</h2>
+    <p class="figure">1.0</p>
+    <p>检测在 new 与 old 之间切换。画质回归和异常森林成对切换，不能只换其中一个。v13 事件候选没有登记进回滚目录。</p>
+    <table>
+      <tr><th>在用</th><th>回滚到</th></tr>
+      <tr><td>yolo11n-dut-new</td><td>yolo11n-dut-old</td></tr>
+      <tr><td>quality-ridge-v1</td><td>quality-candidate-v2</td></tr>
+      <tr><td>event-rf-v1</td><td>event-candidate-v2</td></tr>
+    </table>
+    <p class="src">tests/test_registry.py　·　artifacts/registry/models.json</p>
+  </section>
+
+  <section data-panel="7">
+    <p class="kicker">07　部署</p>
+    <h2>镜像可以启动</h2>
+    <p class="pass">/health 与 /ready 均为 {"status":"ok"}</p>
+    <p>镜像 <code>task4-serving:latest</code>。清单 sha256:347c1be77a2bc9b2d6b3367a6f8861e4fe8fcd078961b1466d6b6dd66a446441。容器用户 uid=10001。端口 8080。推理提供方 CPUExecutionProvider。</p>
+    <p>任务一的 .pt 和任务三的 .joblib 不在镜像里，启动时只读挂载。挂上之后就绪检查会核对 SHA-256。</p>
+    <pre>docker run --rm -p 8080:8080 ^
+  -v %CD%\任务一模型:/app/任务一模型:ro ^
+  -v %CD%\任务三模型:/app/任务三模型:ro ^
+  task4-serving</pre>
+    <p class="src">docker/Dockerfile　·　验收时曾启动并删除验证容器</p>
+  </section>
+
+  <section data-panel="8">
+    <p class="kicker">样例　yolo11n-dut-new</p>
+    <h2>同一张图，切换 FP32 / FP16 / INT8</h2>
+    <p>框来自这次 ONNX 推理，类别都是 drone。点样例、点精度，框会换。01769 的 INT8 没有框，FP32 和 FP16 各有 1 个。</p>
+    <div class="row" id="sample-switch"></div>
+    <div class="row" id="precision-switch">
+      <button type="button" class="chip" data-p="fp32" aria-pressed="true">FP32</button>
+      <button type="button" class="chip" data-p="fp16" aria-pressed="false">FP16</button>
+      <button type="button" class="chip" data-p="int8" aria-pressed="false">INT8</button>
+      <button type="button" class="chip" id="zoom-toggle" aria-pressed="false">放大第一个框</button>
+    </div>
+    <div class="stage-clip">
+      <div class="stage" id="stage">
+        <img id="sample-image" alt="检测样例">
+      </div>
+    </div>
+    <p id="box-readout"></p>
+    <p class="src">任务一模型/demo/samples　·　serving 的 ONNX Runtime　·　new 模型</p>
+  </section>
+</main>
+<script>
+  const BOXES = [{"sample":"01576.jpg","width":1920,"height":1080,"precisions":{"fp32":[{"bbox":[599.2,529.3,647.7,559.8],"confidence":0.6606,"label":"drone"},{"bbox":[1903.6,615.3,1920.0,631.8],"confidence":0.257,"label":"drone"}],"fp16":[{"bbox":[599.0,529.2,647.5,559.8],"confidence":0.6606,"label":"drone"},{"bbox":[1904.2,615.0,1920.0,631.5],"confidence":0.2576,"label":"drone"}],"int8":[{"bbox":[600.1,530.9,646.7,560.0],"confidence":0.6879,"label":"drone"},{"bbox":[1903.6,615.7,1919.5,632.2],"confidence":0.3274,"label":"drone"}]}},{"sample":"01709.jpg","width":1920,"height":1080,"precisions":{"fp32":[{"bbox":[1216.2,188.0,1249.0,211.6],"confidence":0.7812,"label":"drone"}],"fp16":[{"bbox":[1215.8,188.1,1248.7,211.7],"confidence":0.7808,"label":"drone"}],"int8":[{"bbox":[1217.1,187.5,1248.3,211.5],"confidence":0.7524,"label":"drone"}]}},{"sample":"01769.jpg","width":1920,"height":1080,"precisions":{"fp32":[{"bbox":[773.2,527.3,803.0,543.7],"confidence":0.3502,"label":"drone"}],"fp16":[{"bbox":[773.3,527.3,803.2,543.7],"confidence":0.3503,"label":"drone"}],"int8":[]}},{"sample":"01816.jpg","width":1920,"height":1080,"precisions":{"fp32":[{"bbox":[1032.4,443.6,1060.3,458.9],"confidence":0.7722,"label":"drone"}],"fp16":[{"bbox":[1032.3,443.8,1060.2,459.2],"confidence":0.772,"label":"drone"}],"int8":[{"bbox":[1032.5,443.7,1059.8,459.6],"confidence":0.7697,"label":"drone"}]}},{"sample":"01943.jpg","width":1920,"height":1080,"precisions":{"fp32":[],"fp16":[],"int8":[]}},{"sample":"02103.jpg","width":1920,"height":1080,"precisions":{"fp32":[],"fp16":[],"int8":[]}}];
+  const SOAK = [320.2,156.8,118.9,160.7,215.0,131.6,246.8,136.9,183.7,270.8,262.0,276.1,193.8,254.9,268.0,253.2,267.9,246.4,300.5,154.1,133.8,202.8,202.6,147.9,145.6,159.9,152.0,153.7,138.2,137.4,136.0,136.6,161.9,135.6,135.6,154.7,134.8,151.3,175.2,167.3,170.6,166.2,172.3,182.2,176.3,155.6,154.8,161.0,152.3,139.5,142.2,162.9,156.6,128.4,131.5,155.3,140.4,151.5,155.8,142.0,153.0,151.9,134.3,165.7,133.7,161.7,166.9,145.2,156.2,152.8,168.3,179.5,180.8,184.3,175.0,185.4,172.8,149.9,152.1,140.7];
+  const QUALITY = {
+    vector: [["joblib", 3.158458667], ["FP32 ONNX", 3.158458710]],
+    smoke: [["joblib 归一化", 0.536699576], ["FP32 ONNX", 0.536699610]],
+    int8: [["joblib", 3.158458667], ["Ridge INT8", 3.158458710]]
+  };
+
+  const sampleSwitch = document.querySelector("#sample-switch");
+  const stage = document.querySelector("#stage");
+  const sampleImage = document.querySelector("#sample-image");
+  const boxReadout = document.querySelector("#box-readout");
+  let sampleIndex = 0;
+  let precision = "fp32";
+
+  BOXES.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "chip";
+    button.textContent = item.sample;
+    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+    button.addEventListener("click", () => {
+      sampleIndex = index;
+      sampleSwitch.querySelectorAll(".chip").forEach((chip, i) => chip.setAttribute("aria-pressed", i === index ? "true" : "false"));
+      drawSample();
+    });
+    sampleSwitch.appendChild(button);
+  });
+
+  document.querySelectorAll("#precision-switch [data-p]").forEach((button) => {
+    button.addEventListener("click", () => {
+      precision = button.dataset.p;
+      document.querySelectorAll("#precision-switch [data-p]").forEach((chip) => chip.setAttribute("aria-pressed", chip === button ? "true" : "false"));
+      drawSample();
+    });
+  });
+  document.querySelector("#zoom-toggle").addEventListener("click", (event) => {
+    const on = event.currentTarget.getAttribute("aria-pressed") !== "true";
+    event.currentTarget.setAttribute("aria-pressed", on ? "true" : "false");
+    drawSample();
+  });
+
+  function drawSample() {
+    const item = BOXES[sampleIndex];
+    const boxes = item.precisions[precision];
+    sampleImage.src = "../../任务一模型/demo/samples/" + item.sample;
+    sampleImage.alt = item.sample;
+    stage.querySelectorAll(".box").forEach((node) => node.remove());
+    boxes.forEach((box) => {
+      const node = document.createElement("div");
+      node.className = "box";
+      const [x1, y1, x2, y2] = box.bbox;
+      node.style.left = (x1 / item.width * 100) + "%";
+      node.style.top = (y1 / item.height * 100) + "%";
+      node.style.width = ((x2 - x1) / item.width * 100) + "%";
+      node.style.height = ((y2 - y1) / item.height * 100) + "%";
+      const label = document.createElement("span");
+      label.textContent = box.label + " " + box.confidence.toFixed(3);
+      node.appendChild(label);
+      stage.appendChild(node);
+    });
+    const zoom = document.querySelector("#zoom-toggle").getAttribute("aria-pressed") === "true" && boxes.length;
+    stage.classList.toggle("zoom", Boolean(zoom));
+    if (zoom) {
+      const [x1, y1, x2, y2] = boxes[0].bbox;
+      stage.style.setProperty("--ox", ((x1 + x2) / 2 / item.width * 100) + "%");
+      stage.style.setProperty("--oy", ((y1 + y2) / 2 / item.height * 100) + "%");
+    }
+    boxReadout.textContent = item.sample + "　" + precision.toUpperCase() + "　" + boxes.length + " 个框"
+      + (boxes.length ? "，最高置信度 " + Math.max(...boxes.map((box) => box.confidence)).toFixed(4) : "。这一档没有检出。");
+  }
+  drawSample();
+
+  const qualityHost = document.querySelector("#quality-meters");
+  function drawQuality(key) {
+    const rows = QUALITY[key];
+    const max = Math.max(...rows.map((row) => row[1]));
+    qualityHost.replaceChildren(...rows.map(([name, value]) => {
+      const row = document.createElement("div");
+      row.className = "meter";
+      row.innerHTML = "<span>" + name + "</span><div class='track'><div class='fill' style='width:" + (value / max * 100) + "%'></div></div><span>" + value.toFixed(9) + "</span>";
+      return row;
+    }));
+  }
+  document.querySelectorAll("#quality-switch .chip").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll("#quality-switch .chip").forEach((chip) => chip.setAttribute("aria-pressed", chip === button ? "true" : "false"));
+      drawQuality(button.dataset.q);
+    });
+  });
+  drawQuality("vector");
+
+  const latencyHost = document.querySelector("#latency-meters");
+  const latencyReadout = document.querySelector("#latency-readout");
+  [["P50", 107.13], ["P95", 140.55], ["P99", 627.47]].forEach(([name, value]) => {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = "meter";
+    const width = Math.min(100, value / 300 * 100);
+    row.innerHTML = "<span>" + name + "</span><div class='track'><div class='fill" + (value > 300 ? " warn" : "") + "' style='width:" + width + "%'></div></div><span>" + value.toFixed(1) + " ms</span>";
+    row.addEventListener("click", () => {
+      latencyHost.querySelectorAll("button").forEach((item) => item.removeAttribute("aria-pressed"));
+      row.setAttribute("aria-pressed", "true");
+      const ratio = value / 300;
+      latencyReadout.textContent = value > 300
+        ? name + " 是 " + value.toFixed(1) + " ms，超过 300 ms 上限 " + (value - 300).toFixed(1) + " ms。验收看的是 P95。"
+        : name + " 是 " + value.toFixed(1) + " ms，占 300 ms 上限的 " + (ratio * 100).toFixed(1) + "%。";
+    });
+    latencyHost.appendChild(row);
+  });
+
+  const throughputHost = document.querySelector("#throughput-meters");
+  [["单帧", 8.1195], ["8 帧", 19.7499]].forEach(([name, value]) => {
+    const row = document.createElement("div");
+    row.className = "meter";
+    row.innerHTML = "<span>" + name + "</span><div class='track'><div class='fill' style='width:" + (value / 19.7499 * 100) + "%'></div></div><span>" + value.toFixed(2) + " 帧/秒</span>";
+    throughputHost.appendChild(row);
+  });
+
+  const chart = document.querySelector("#soak-chart");
+  const maxLatency = Math.max(...SOAK);
+  const points = SOAK.map((value, index) => {
+    const x = index / (SOAK.length - 1) * 800;
+    const y = 150 - (value / maxLatency) * 140;
+    return x.toFixed(1) + "," + y.toFixed(1);
+  }).join(" ");
+  chart.innerHTML = "<polyline points='" + points + "'></polyline>";
+  chart.addEventListener("mousemove", (event) => {
+    const rect = chart.getBoundingClientRect();
+    const index = Math.round((event.clientX - rect.left) / rect.width * (SOAK.length - 1));
+    const clamped = Math.max(0, Math.min(SOAK.length - 1, index));
+    document.querySelector("#soak-readout").textContent = "第 " + (clamped * 36 + 1) + " 次附近，客户端 " + SOAK[clamped].toFixed(1) + " ms";
+  });
+
+  const buttons = [...document.querySelectorAll("nav button")];
+  const panels = [...document.querySelectorAll("section")];
+  function show(index) {
+    const next = (index + panels.length) % panels.length;
+    panels.forEach((panel, i) => panel.classList.toggle("active", i === next));
+    buttons.forEach((button, i) => {
+      if (i === next) button.setAttribute("aria-current", "true");
+      else button.removeAttribute("aria-current");
+    });
+  }
+  buttons.forEach((button) => button.addEventListener("click", () => show(Number(button.dataset.go))));
+  document.addEventListener("keydown", (event) => {
+    const current = panels.findIndex((panel) => panel.classList.contains("active"));
+    if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.key === "PageDown") show(current + 1);
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "PageUp") show(current - 1);
+    if (event.key === "Home") show(0);
+  });
+  show(0);
+</script>
+</body>
+</html>

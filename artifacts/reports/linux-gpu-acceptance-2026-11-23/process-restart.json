@@ -1,0 +1,19 @@
+{
+  "environment": "local Windows CPU, isolated Uvicorn process",
+  "runs": [
+    {
+      "run": 1,
+      "pid": 33704,
+      "health": "ok",
+      "ready": "ok",
+      "infer": "ok"
+    },
+    {
+      "run": 2,
+      "pid": 2788,
+      "health": "ok",
+      "ready": "ok",
+      "infer": "ok"
+    }
+  ]
+}

@@ -1,0 +1,412 @@
+{
+  "$defs": {
+    "AnomalyInterval": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "blur",
+            "dark",
+            "overexposed",
+            "freeze_suspected",
+            "decode_error"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "startTimeS": {
+          "minimum": 0,
+          "title": "Starttimes",
+          "type": "number"
+        },
+        "endTimeS": {
+          "minimum": 0,
+          "title": "Endtimes",
+          "type": "number"
+        },
+        "status": {
+          "enum": [
+            "suspected",
+            "confirmed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidenceTimeS": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidencetimes"
+        }
+      },
+      "required": [
+        "type",
+        "startTimeS",
+        "endTimeS",
+        "status"
+      ],
+      "title": "AnomalyInterval",
+      "type": "object"
+    },
+    "DataQuality": {
+      "enum": [
+        "ok",
+        "degraded",
+        "unusable",
+        "unknown"
+      ],
+      "title": "DataQuality",
+      "type": "string"
+    },
+    "DeviceStatus": {
+      "enum": [
+        "ok",
+        "fault",
+        "unknown"
+      ],
+      "title": "DeviceStatus",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "description": "Pointer to an immutable raw artifact. Omit the list until the artifact exists.",
+      "properties": {
+        "uri": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "mediaTimeS": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mediatimes"
+        }
+      },
+      "required": [
+        "uri",
+        "sha256"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Fields every task must carry when it emits a result or an observation.",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/SourceModality"
+        },
+        "deviceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Deviceid",
+          "type": "string"
+        },
+        "observedAt": {
+          "format": "date-time",
+          "title": "Observedat",
+          "type": "string"
+        },
+        "receivedAt": {
+          "format": "date-time",
+          "title": "Receivedat",
+          "type": "string"
+        },
+        "dataQuality": {
+          "$ref": "#/$defs/DataQuality"
+        },
+        "timeQuality": {
+          "$ref": "#/$defs/TimeQuality"
+        },
+        "modelVersion": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Modelversion"
+        },
+        "deviceStatus": {
+          "$ref": "#/$defs/DeviceStatus",
+          "default": "unknown"
+        },
+        "siteId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Siteid"
+        },
+        "channelId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Channelid"
+        },
+        "clockOffsetMs": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clockoffsetms"
+        },
+        "evidenceRefs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidencerefs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source",
+        "deviceId",
+        "observedAt",
+        "receivedAt",
+        "dataQuality",
+        "timeQuality"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "QualityJobError": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "empty",
+            "corrupt",
+            "missing_timestamp",
+            "unsupported"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "QualityJobError",
+      "type": "object"
+    },
+    "SourceModality": {
+      "enum": [
+        "radar",
+        "rf",
+        "eo"
+      ],
+      "title": "SourceModality",
+      "type": "string"
+    },
+    "TimeQuality": {
+      "enum": [
+        "synchronized",
+        "estimated",
+        "unsynchronized",
+        "unknown"
+      ],
+      "title": "TimeQuality",
+      "type": "string"
+    },
+    "VideoQualityResult": {
+      "additionalProperties": false,
+      "description": "Task 3 output. A quality score is not a detection probability.",
+      "properties": {
+        "schemaVersion": {
+          "default": "shared.video-quality/1.0",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "jobId": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Jobid",
+          "type": "string"
+        },
+        "videoId": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Videoid",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "channelType": {
+          "enum": [
+            "visible",
+            "infrared",
+            "unknown"
+          ],
+          "title": "Channeltype",
+          "type": "string"
+        },
+        "isSynthetic": {
+          "title": "Issynthetic",
+          "type": "boolean"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "scoreStatus": {
+          "enum": [
+            "scored",
+            "rejected"
+          ],
+          "title": "Scorestatus",
+          "type": "string"
+        },
+        "qualityScore": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Qualityscore"
+        },
+        "anomalies": {
+          "items": {
+            "$ref": "#/$defs/AnomalyInterval"
+          },
+          "title": "Anomalies",
+          "type": "array"
+        },
+        "processingTimeMs": {
+          "minimum": 0,
+          "title": "Processingtimems",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "jobId",
+        "videoId",
+        "provenance",
+        "channelType",
+        "isSynthetic",
+        "limitations",
+        "scoreStatus",
+        "anomalies",
+        "processingTimeMs"
+      ],
+      "title": "VideoQualityResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "GET /quality/jobs/{jobId}. A failed job has an error and no quality score.",
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.quality-job-status/1.0",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "jobId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Jobid",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "queued",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/VideoQualityResult"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/QualityJobError"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "jobId",
+    "state"
+  ],
+  "title": "QualityJobSnapshot",
+  "type": "object"
+}

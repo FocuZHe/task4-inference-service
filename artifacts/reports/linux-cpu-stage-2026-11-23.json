@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-23",
+  "serverOs": "Ubuntu 26.04 LTS x86_64",
+  "stageDirectory": "/var/tmp/task4-stage.wqgJkvZE",
+  "imageId": "sha256:e67db9b14d098500c534b3acb73f5503fad7eed29720b8870d12dadb98ae245b",
+  "isolation": {
+    "network": "none",
+    "ports": {},
+    "user": "10001:10001",
+    "readOnly": true,
+    "privileged": false,
+    "gpuRequests": null,
+    "cpus": 2000000000,
+    "memoryBytes": 4294967296,
+    "pidsLimit": 96,
+    "cpuAffinity": "126-127",
+    "readOnlyMounts": [
+      "/app",
+      "/opt/task4"
+    ],
+    "capDrop": [
+      "ALL"
+    ]
+  },
+  "testedSourceFiles": {
+    "serving/ort_runtime.py": "72b26db15be3ed8ea7aabec9b2fbbca383e1ee6b49fa66d2dffae418b58d8f8a",
+    "serving/detection_runtime.py": "a8eabe905f2bdd9884407d67ca8d13f46cde2a8a51ca57d2b45613c97f2aa482",
+    "serving/quality_runtime.py": "347ff5bb31a5dcf6f4561ffa85534ee0c199e350bb8e12e782cd67ff5f69ebca"
+  },
+  "initialColdStart": {
+    "errorCode": "TIMEOUT",
+    "httpStatus": 408,
+    "latencyMs": 2003.02,
+    "finding": "ORT automatic affinity targeted CPUs outside the container cpuset."
+  },
+  "finalSmoke": {
+    "/health": "ok",
+    "/ready": "ok",
+    "frame": {
+      "width": 1920,
+      "height": 1080,
+      "latencyMs": 137.99
+    },
+    "batch": {
+      "frames": 8,
+      "matchesFrame": true,
+      "latencyMs": 734.31
+    },
+    "qualityVideo": {
+      "score": 0.6425238575851709,
+      "latencyMs": 244.85
+    },
+    "badInput": "INVALID_INPUT",
+    "metrics": "ok",
+    "onnxRuntime": {
+      "version": "1.26.0",
+      "providers": [
+        "AzureExecutionProvider",
+        "CPUExecutionProvider"
+      ]
+    }
+  },
+  "latencySample": {
+    "image": "artifacts/fixtures/ten-second-1080p.mp4#frame0",
+    "width": 1920,
+    "height": 1080,
+    "requests": 5,
+    "batchSize": 8,
+    "p50Ms": 71.1346,
+    "p95Ms": 71.8231,
+    "p99Ms": 71.9065,
+    "serverP50Ms": 63.28,
+    "serverP95Ms": 63.69,
+    "serverP99Ms": 63.738,
+    "throughputPerS": 14.0399,
+    "queueWaitP95Ms": 8.3528,
+    "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+    "errorRate": 0.0,
+    "rssBytes": 1445867520,
+    "gpuBytes": 0,
+    "batch8Throughput": 16.5197,
+    "singleThroughput": 14.0399,
+    "batchThroughputRatio": 1.1766,
+    "singleFrameP95Pass": true,
+    "batchThroughputPass": false,
+    "enabledMeans": [
+      "imgsz 640",
+      "POST /infer/batch",
+      "JPEG and PNG dimensions read from the header",
+      "benchmark client reuses one HTTP connection",
+      "orjson for the 8-frame JSON body"
+    ],
+    "batchErrorRate": 0.0,
+    "batchP95Ms": 492.9237
+  },
+  "shortSoak": {
+    "durationS": 30,
+    "intervalS": 5,
+    "responses": [
+      {
+        "at": "2026-11-23T09:03:55.525535+00:00",
+        "requestId": "soak-1",
+        "status": 200,
+        "errorCode": null,
+        "latencyMs": 67.14,
+        "clientLatencyMs": 73.15,
+        "width": 1920,
+        "height": 1080,
+        "unhandled": false
+      },
+      {
+        "at": "2026-11-23T09:04:00.548654+00:00",
+        "requestId": "soak-2",
+        "status": 200,
+        "errorCode": null,
+        "latencyMs": 69.88,
+        "clientLatencyMs": 97.81,
+        "width": 1920,
+        "height": 1080,
+        "unhandled": false
+      },
+      {
+        "at": "2026-11-23T09:04:05.554115+00:00",
+        "requestId": "soak-3",
+        "status": 200,
+        "errorCode": null,
+        "latencyMs": 80.94,
+        "clientLatencyMs": 97.32,
+        "width": 1920,
+        "height": 1080,
+        "unhandled": false
+      },
+      {
+        "at": "2026-11-23T09:04:10.580161+00:00",
+        "requestId": "soak-4",
+        "status": 200,
+        "errorCode": null,
+        "latencyMs": 93.83,
+        "clientLatencyMs": 112.95,
+        "width": 1920,
+        "height": 1080,
+        "unhandled": false
+      },
+      {
+        "at": "2026-11-23T09:04:15.577108+00:00",
+        "requestId": "soak-5",
+        "status": 200,
+        "errorCode": null,
+        "latencyMs": 94.12,
+        "clientLatencyMs": 105.24,
+        "width": 1920,
+        "height": 1080,
+        "unhandled": false
+      },
+      {
+        "at": "2026-11-23T09:04:20.584409+00:00",
+        "requestId": "soak-6",
+        "status": 200,
+        "errorCode": null,
+        "latencyMs": 93.99,
+        "clientLatencyMs": 112.71,
+        "width": 1920,
+        "height": 1080,
+        "unhandled": false
+      }
+    ]
+  },
+  "exit": {
+    "reason": "Docker stop after testing",
+    "shutdownCompleteInLog": true,
+    "ExitCode": 143,
+    "OOMKilled": false,
+    "StartedAt": "2026-11-23T09:03:42.30534609Z",
+    "FinishedAt": "2026-11-23T09:04:27.698456622Z"
+  }
+}

@@ -1,0 +1,13 @@
+**
+!requirements-task4-gpu.txt
+!serving/
+!serving/*.py
+!benchmark/
+!benchmark/*.py
+!artifacts/
+!artifacts/registry/
+!artifacts/registry/models.json
+!artifacts/onnx/
+!artifacts/onnx/*-fp32.onnx
+!artifacts/fixtures/
+!artifacts/fixtures/ten-second-1080p.mp4

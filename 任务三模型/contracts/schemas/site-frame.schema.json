@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "Wgs84Point": {
+      "additionalProperties": false,
+      "description": "A surveyed or nominal point. It does not claim a measurement error.",
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Lon",
+          "type": "number"
+        },
+        "altitudeM": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Altitudem"
+        }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "title": "Wgs84Point",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Site origin used to convert WGS84 and local ENU. Tasks can omit it until surveyed.",
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.site-frame/1.0",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "siteId": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Siteid",
+      "type": "string"
+    },
+    "frameId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Frameid",
+      "type": "string"
+    },
+    "origin": {
+      "$ref": "#/$defs/Wgs84Point"
+    },
+    "calibrationStatus": {
+      "enum": [
+        "calibrated",
+        "unknown",
+        "invalid"
+      ],
+      "title": "Calibrationstatus",
+      "type": "string"
+    },
+    "calibrationRef": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Calibrationref"
+    }
+  },
+  "required": [
+    "siteId",
+    "frameId",
+    "origin",
+    "calibrationStatus"
+  ],
+  "title": "SiteFrame",
+  "type": "object"
+}

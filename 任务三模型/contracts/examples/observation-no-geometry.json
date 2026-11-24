@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "shared.observation/1.1",
+  "observationId": "obs-rf-spectrum-001",
+  "provenance": {
+    "source": "rf",
+    "deviceId": "rf-01",
+    "observedAt": "2026-10-27T02:00:00Z",
+    "receivedAt": "2026-10-27T02:00:00.100Z",
+    "dataQuality": "degraded",
+    "timeQuality": "synchronized",
+    "modelVersion": "rf-1dcnn-v1"
+  },
+  "sessionId": "session-001",
+  "coordinateSystem": "none",
+  "classificationId": "rf-001"
+}

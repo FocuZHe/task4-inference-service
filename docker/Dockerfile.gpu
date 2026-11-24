@@ -1,0 +1,29 @@
+FROM python:3.11-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    OPENBLAS_NUM_THREADS=1 \
+    OMP_NUM_THREADS=1 \
+    NVIDIA_DRIVER_CAPABILITIES=compute,utility \
+    TASK4_ORT_PROVIDER=CUDAExecutionProvider
+
+WORKDIR /app
+
+COPY requirements-task4-gpu.txt .
+RUN python -m pip install --no-cache-dir --only-binary=:all: -r requirements-task4-gpu.txt \
+    && python -m pip check \
+    && printf '%s\n' /usr/local/lib/python3.11/site-packages/nvidia/*/lib > /etc/ld.so.conf.d/task4-cuda.conf \
+    && ldconfig \
+    && python -c "import cv2, onnxruntime as ort; assert 'CUDAExecutionProvider' in ort.get_available_providers()"
+
+COPY serving ./serving
+COPY benchmark ./benchmark
+COPY --chown=10001:10001 artifacts/registry ./artifacts/registry
+COPY artifacts/onnx/*-fp32.onnx ./artifacts/onnx/
+COPY artifacts/fixtures/ten-second-1080p.mp4 ./artifacts/fixtures/
+
+RUN useradd --create-home --uid 10001 --shell /usr/sbin/nologin appuser
+USER appuser
+
+EXPOSE 8080
+CMD ["uvicorn", "serving.app:app", "--host", "0.0.0.0", "--port", "8080"]

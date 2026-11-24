@@ -1,0 +1,434 @@
+{
+  "$defs": {
+    "DataQuality": {
+      "enum": [
+        "ok",
+        "degraded",
+        "unusable",
+        "unknown"
+      ],
+      "title": "DataQuality",
+      "type": "string"
+    },
+    "DeviceStatus": {
+      "enum": [
+        "ok",
+        "fault",
+        "unknown"
+      ],
+      "title": "DeviceStatus",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "description": "Pointer to an immutable raw artifact. Omit the list until the artifact exists.",
+      "properties": {
+        "uri": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "mediaTimeS": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mediatimes"
+        }
+      },
+      "required": [
+        "uri",
+        "sha256"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "MeasuredPosition": {
+      "additionalProperties": false,
+      "description": "A position estimate. Horizontal error is required; height error follows height.",
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Lon",
+          "type": "number"
+        },
+        "altitudeM": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Altitudem"
+        },
+        "horizontalStdM": {
+          "exclusiveMinimum": 0,
+          "title": "Horizontalstdm",
+          "type": "number"
+        },
+        "verticalStdM": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verticalstdm"
+        }
+      },
+      "required": [
+        "lat",
+        "lon",
+        "horizontalStdM"
+      ],
+      "title": "MeasuredPosition",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Fields every task must carry when it emits a result or an observation.",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/SourceModality"
+        },
+        "deviceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Deviceid",
+          "type": "string"
+        },
+        "observedAt": {
+          "format": "date-time",
+          "title": "Observedat",
+          "type": "string"
+        },
+        "receivedAt": {
+          "format": "date-time",
+          "title": "Receivedat",
+          "type": "string"
+        },
+        "dataQuality": {
+          "$ref": "#/$defs/DataQuality"
+        },
+        "timeQuality": {
+          "$ref": "#/$defs/TimeQuality"
+        },
+        "modelVersion": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Modelversion"
+        },
+        "deviceStatus": {
+          "$ref": "#/$defs/DeviceStatus",
+          "default": "unknown"
+        },
+        "siteId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Siteid"
+        },
+        "channelId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Channelid"
+        },
+        "clockOffsetMs": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clockoffsetms"
+        },
+        "evidenceRefs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidencerefs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source",
+        "deviceId",
+        "observedAt",
+        "receivedAt",
+        "dataQuality",
+        "timeQuality"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "SourceModality": {
+      "enum": [
+        "radar",
+        "rf",
+        "eo"
+      ],
+      "title": "SourceModality",
+      "type": "string"
+    },
+    "TimeQuality": {
+      "enum": [
+        "synchronized",
+        "estimated",
+        "unsynchronized",
+        "unknown"
+      ],
+      "title": "TimeQuality",
+      "type": "string"
+    },
+    "Wgs84Point": {
+      "additionalProperties": false,
+      "description": "A surveyed or nominal point. It does not claim a measurement error.",
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Lon",
+          "type": "number"
+        },
+        "altitudeM": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Altitudem"
+        }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "title": "Wgs84Point",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Task 2 input. Position is present only when it was actually measured or converted.",
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.observation/1.1",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "observationId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Observationid",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "sessionId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Sessionid",
+      "type": "string"
+    },
+    "frameIndex": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frameindex"
+    },
+    "coordinateSystem": {
+      "enum": [
+        "EPSG:4326",
+        "true-north-bearing",
+        "none"
+      ],
+      "title": "Coordinatesystem",
+      "type": "string"
+    },
+    "position": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MeasuredPosition"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "bearingDeg": {
+      "anyOf": [
+        {
+          "exclusiveMaximum": 360,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bearingdeg"
+    },
+    "bearingStdDeg": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bearingstddeg"
+    },
+    "origin": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Wgs84Point"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "calibrationRef": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Calibrationref"
+    },
+    "quality": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quality"
+    },
+    "detectionId": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detectionid"
+    },
+    "classificationId": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Classificationid"
+    }
+  },
+  "required": [
+    "observationId",
+    "provenance",
+    "sessionId",
+    "coordinateSystem"
+  ],
+  "title": "Observation",
+  "type": "object"
+}

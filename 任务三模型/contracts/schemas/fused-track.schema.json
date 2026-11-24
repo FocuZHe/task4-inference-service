@@ -1,0 +1,385 @@
+{
+  "$defs": {
+    "AssociationEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "observationId": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Observationid",
+          "type": "string"
+        },
+        "trackFrameIndex": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trackframeindex"
+        },
+        "observationFrameIndex": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observationframeindex"
+        },
+        "timeDeltaMs": {
+          "minimum": 0,
+          "title": "Timedeltams",
+          "type": "integer"
+        },
+        "bearingDeltaDeg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bearingdeltadeg"
+        },
+        "positionResidualM": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Positionresidualm"
+        },
+        "decision": {
+          "enum": [
+            "assigned",
+            "rejected",
+            "abstained"
+          ],
+          "title": "Decision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observationId",
+        "timeDeltaMs",
+        "decision"
+      ],
+      "title": "AssociationEvidence",
+      "type": "object"
+    },
+    "Conflict": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "observationIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observationids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "reason"
+      ],
+      "title": "Conflict",
+      "type": "object"
+    },
+    "LabelHypothesis": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/TargetLabel"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "classProbabilities": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Classprobabilities"
+        },
+        "locked": {
+          "default": false,
+          "title": "Locked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "LabelHypothesis",
+      "type": "object"
+    },
+    "MeasuredPosition": {
+      "additionalProperties": false,
+      "description": "A position estimate. Horizontal error is required; height error follows height.",
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Lon",
+          "type": "number"
+        },
+        "altitudeM": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Altitudem"
+        },
+        "horizontalStdM": {
+          "exclusiveMinimum": 0,
+          "title": "Horizontalstdm",
+          "type": "number"
+        },
+        "verticalStdM": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verticalstdm"
+        }
+      },
+      "required": [
+        "lat",
+        "lon",
+        "horizontalStdM"
+      ],
+      "title": "MeasuredPosition",
+      "type": "object"
+    },
+    "SourceModality": {
+      "enum": [
+        "radar",
+        "rf",
+        "eo"
+      ],
+      "title": "SourceModality",
+      "type": "string"
+    },
+    "TargetLabel": {
+      "enum": [
+        "drone",
+        "bird",
+        "aircraft",
+        "unknown"
+      ],
+      "title": "TargetLabel",
+      "type": "string"
+    },
+    "Velocity": {
+      "additionalProperties": false,
+      "properties": {
+        "speedMps": {
+          "minimum": 0,
+          "title": "Speedmps",
+          "type": "number"
+        },
+        "headingDeg": {
+          "anyOf": [
+            {
+              "exclusiveMaximum": 360,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Headingdeg"
+        }
+      },
+      "required": [
+        "speedMps"
+      ],
+      "title": "Velocity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Task 2 output. This message never grants permission to move a device.",
+  "properties": {
+    "schemaVersion": {
+      "default": "shared.fused-track/1.1",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "trackId": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Trackid",
+      "type": "string"
+    },
+    "lifecycle": {
+      "enum": [
+        "tentative",
+        "confirmed",
+        "coasting",
+        "deleted"
+      ],
+      "title": "Lifecycle",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceModality"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "deviceIds": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Deviceids",
+      "type": "array"
+    },
+    "firstSeenAt": {
+      "format": "date-time",
+      "title": "Firstseenat",
+      "type": "string"
+    },
+    "lastSeenAt": {
+      "format": "date-time",
+      "title": "Lastseenat",
+      "type": "string"
+    },
+    "publishedAt": {
+      "format": "date-time",
+      "title": "Publishedat",
+      "type": "string"
+    },
+    "position": {
+      "$ref": "#/$defs/MeasuredPosition"
+    },
+    "velocity": {
+      "$ref": "#/$defs/Velocity"
+    },
+    "freshness": {
+      "enum": [
+        "expected",
+        "aging",
+        "stale",
+        "expired"
+      ],
+      "title": "Freshness",
+      "type": "string"
+    },
+    "associationEvidence": {
+      "items": {
+        "$ref": "#/$defs/AssociationEvidence"
+      },
+      "minItems": 1,
+      "title": "Associationevidence",
+      "type": "array"
+    },
+    "conflicts": {
+      "items": {
+        "$ref": "#/$defs/Conflict"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "labelHypotheses": {
+      "items": {
+        "$ref": "#/$defs/LabelHypothesis"
+      },
+      "title": "Labelhypotheses",
+      "type": "array"
+    },
+    "fusionVersion": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Fusionversion",
+      "type": "string"
+    },
+    "actionAuthority": {
+      "const": false,
+      "default": false,
+      "title": "Actionauthority",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "trackId",
+    "lifecycle",
+    "sources",
+    "deviceIds",
+    "firstSeenAt",
+    "lastSeenAt",
+    "publishedAt",
+    "position",
+    "velocity",
+    "freshness",
+    "associationEvidence",
+    "conflicts",
+    "fusionVersion"
+  ],
+  "title": "FusedTrack",
+  "type": "object"
+}

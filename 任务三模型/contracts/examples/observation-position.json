@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "shared.observation/1.1",
+  "observationId": "obs-radar-001",
+  "provenance": {
+    "source": "radar",
+    "deviceId": "radar-01",
+    "observedAt": "2026-10-27T02:00:00Z",
+    "receivedAt": "2026-10-27T02:00:00.050Z",
+    "dataQuality": "ok",
+    "timeQuality": "synchronized",
+    "deviceStatus": "ok"
+  },
+  "sessionId": "session-001",
+  "frameIndex": 15,
+  "coordinateSystem": "EPSG:4326",
+  "position": {
+    "lat": 31.2304,
+    "lon": 121.4737,
+    "altitudeM": 80.0,
+    "horizontalStdM": 20.0,
+    "verticalStdM": 8.0
+  },
+  "bearingDeg": 42.0,
+  "bearingStdDeg": 1.5,
+  "calibrationRef": "radar-01-extrinsic-v1",
+  "quality": 0.9
+}

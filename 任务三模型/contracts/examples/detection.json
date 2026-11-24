@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "shared.detection/1.1",
+  "detectionId": "det-001",
+  "provenance": {
+    "source": "eo",
+    "deviceId": "camera-01",
+    "observedAt": "2026-10-27T02:00:00Z",
+    "receivedAt": "2026-10-27T02:00:00.080Z",
+    "dataQuality": "ok",
+    "timeQuality": "synchronized",
+    "modelVersion": "uav-baseline-v1",
+    "evidenceRefs": [
+      {
+        "uri": "evidence/video-001/frame-120.png",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "mediaTimeS": 4.8
+      }
+    ]
+  },
+  "frameIndex": 120,
+  "videoId": "video-001",
+  "mediaTimeS": 4.8,
+  "imageWidth": 1920,
+  "imageHeight": 1080,
+  "bboxXyxy": [40.0, 30.0, 80.0, 70.0],
+  "label": "drone",
+  "confidence": 0.82,
+  "labelConfirmed": false
+}

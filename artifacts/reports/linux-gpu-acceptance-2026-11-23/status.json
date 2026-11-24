@@ -1,0 +1,26 @@
+{
+  "state": "passed",
+  "startedAt": "2026-11-23T13:02:45.195203+00:00",
+  "finishedAt": "2026-11-23T21:02:48.600210+00:00",
+  "reason": null,
+  "container": [
+    "16d0453e984c80a0f4de6badfb6308b1697d30ebe186b7bbddf0b980e6eec0fe",
+    "2026-11-23T11:47:18.371966559Z",
+    "0",
+    "healthy",
+    "true"
+  ],
+  "clientExitCode": 0,
+  "durationRequestedS": 28800,
+  "clientElapsedSIncludingSetup": 28800.124031462998,
+  "intervalS": 10,
+  "requests": 2880,
+  "errors": 0,
+  "unhandled": 0,
+  "samples": 2811,
+  "p50Ms": 71.38,
+  "p95Ms": 75.581,
+  "p99Ms": 83.6505,
+  "peakSampledGpuUsedMiB": 877,
+  "peakSampledContainerMemoryBytes": 1419595776
+}

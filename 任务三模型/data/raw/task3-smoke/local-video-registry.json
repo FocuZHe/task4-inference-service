@@ -1,0 +1,11 @@
+{
+  "videos": [
+    {
+      "videoId": "task3-engineering-smoke-10s",
+      "path": "engineering-smoke-10s.avi",
+      "channelType": "visible",
+      "isSynthetic": true,
+      "sha256": "805eb00bee52bb01bd2ac0ef04aca6417786ccd96bf33ed1e9701b62443501e6"
+    }
+  ]
+}

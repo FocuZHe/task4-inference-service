@@ -1,0 +1,63 @@
+{
+  "fixedVector": {
+    "nativeScore": 3.1584586672133748,
+    "onnxScore": 3.158458709716797,
+    "absDiff": 4.250342211520319e-08,
+    "eventClass": "normal",
+    "onnxEventClass": "normal"
+  },
+  "smoke": {
+    "videoId": "task3-engineering-smoke-10s",
+    "isSynthetic": true,
+    "nativeQualityScore": 0.5366995763094905,
+    "onnxQualityScore": 0.5366996101468627,
+    "absDiff": 3.383737223749961e-08,
+    "intervals": {
+      "blur": [],
+      "dark": [],
+      "overexposed": [
+        {
+          "startTimeS": 0.48,
+          "endTimeS": 10.0
+        }
+      ],
+      "freeze_suspected": []
+    }
+  },
+  "files": [
+    {
+      "path": "quality-ridge-v1-fp16.onnx",
+      "sha256": "ed607afeb108b05be950a192c0708a893fac31bc0c3858faf7866e1b2a40ce19",
+      "bytes": 1152
+    },
+    {
+      "path": "quality-ridge-v1-fp32.onnx",
+      "sha256": "84183a4e7d0618652cf60a1ed584703a408d1fe5c79ed5d526abadf9b4f5931c",
+      "bytes": 572
+    },
+    {
+      "path": "quality-ridge-v1-int8.onnx",
+      "sha256": "75ed7a81d938d3570514438825abdaeb00051affcaeaf9e2c56225682b36e2a9",
+      "bytes": 314
+    },
+    {
+      "path": "event-rf-v1-fp16.onnx",
+      "sha256": "f3dc6c151dabd25d571b4c827864314c89c45263a5b93f02484d9455018f6e39",
+      "bytes": 354683166
+    },
+    {
+      "path": "event-rf-v1-fp32.onnx",
+      "sha256": "1f08f616979f36f76f37eab1244b4718fff3a26f705f1a40245a863bb0d457b7",
+      "bytes": 354682586
+    }
+  ],
+  "conversionError": {
+    "event-rf-v1-int8.onnx": "Unsupported: TreeEnsembleClassifier uses domain ai.onnx.ml. quantize_dynamic only accepts ai.onnx Conv/MatMul/Gemm. Serving stays on event-rf-v1-fp32.onnx."
+  },
+  "ridgeInt8": {
+    "nativeScore": 3.1584586672133748,
+    "int8Score": 3.158458709716797,
+    "absDiff": 4.250342211520319e-08,
+    "graph": "per-feature DequantizeLinear + Gemm; imputer and scaler folded for finite inputs"
+  }
+}

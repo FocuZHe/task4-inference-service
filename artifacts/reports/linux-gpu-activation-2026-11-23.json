@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-23",
+  "host": "192.168.153.223",
+  "container": "task4-gpu",
+  "stagedRelease": "/var/tmp/task4-gpu-service.7W64i38W",
+  "endpointScope": "container loopback",
+  "entrypoint": "serving.app:app",
+  "runtime": {
+    "provider": "CUDAExecutionProvider",
+    "version": "1.26.0",
+    "gpuIndex": 0,
+    "gpuUuid": "GPU-0ce41810-22bc-11f5-9a09-73af03b705b5",
+    "precision": "FP32",
+    "cudaBatchSize": 8,
+    "qualityProvider": "CPUExecutionProvider"
+  },
+  "sourceHashes": {
+    "artifacts/onnx/yolo11n-dut-new-batch-fp32.onnx": "953aa1c0764b4e7aa0378bb6454ad410e84f125a9d10e8949d1e181646c886fd",
+    "serving/detection_runtime.py": "980698f976142f346a3e67a09aef7d1c1c6ac023eb58fcc2e3b0893a81201c35"
+  },
+  "isolation": {
+    "network": "none",
+    "ports": {},
+    "deviceRequests": [
+      {
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Count": 0,
+        "DeviceIDs": [
+          "GPU-0ce41810-22bc-11f5-9a09-73af03b705b5"
+        ],
+        "Driver": "",
+        "Options": {}
+      }
+    ],
+    "user": "10001:10001",
+    "readOnly": true,
+    "cpuQuota": 8000000000,
+    "memoryBytes": 4294967296
+  },
+  "containerState": {
+    "running": true,
+    "health": "healthy",
+    "restartPolicy": "no",
+    "startedAt": "2026-11-23T11:47:18.371966559Z",
+    "containerId": "16d0453e984c80a0f4de6badfb6308b1697d30ebe186b7bbddf0b980e6eec0fe"
+  },
+  "parity": {
+    "images": 8,
+    "nonEmptyImages": 4,
+    "boxes": 5,
+    "classAgreement": true,
+    "maxAllowedBoxCoordinateGapPx": 1,
+    "maxAllowedConfidenceGap": 0.05
+  },
+  "benchmark": {
+    "image": "artifacts/fixtures/ten-second-1080p.mp4#frames=0-39",
+    "fixtureFrames": 40,
+    "distinctInputFrames": 40,
+    "width": 1920,
+    "height": 1080,
+    "requests": 100,
+    "batchSize": 8,
+    "p50Ms": 60.5289,
+    "p95Ms": 64.2571,
+    "p99Ms": 67.0649,
+    "serverP50Ms": 38.16,
+    "serverP95Ms": 41.5135,
+    "serverP99Ms": 42.9924,
+    "throughputPerS": 16.3128,
+    "queueWaitP95Ms": 24.2055,
+    "queueWaitNote": "clientLatencyMs minus server latencyMs; includes HTTP transfer of the JPEG, not only queue time",
+    "errorRate": 0.0,
+    "rssBytes": 1601662976,
+    "gpuBytes": 829423616,
+    "batch8Throughput": 36.8682,
+    "singleThroughput": 16.3128,
+    "batchThroughputRatio": 2.2601,
+    "singleFrameP95Pass": true,
+    "batchThroughputPass": true,
+    "batchP95Speedup": 2.1689,
+    "batchP99Speedup": 2.1869,
+    "batchP95SpeedupPass": true,
+    "batchP99SpeedupPass": true,
+    "enabledMeans": [
+      "imgsz 640",
+      "POST /infer/batch",
+      "JPEG and PNG dimensions read from the header",
+      "benchmark client reuses one HTTP connection",
+      "orjson for the 8-frame JSON body"
+    ],
+    "batchErrorRate": 0.0,
+    "batchP95Ms": 237.0141,
+    "batchP99Ms": 245.3356,
+    "batchServerP95Ms": 101.0995,
+    "batchServerP99Ms": 109.2375
+  },
+  "localRegressionTestsPassed": 43,
+  "gpuObservation": {
+    "samples": 22,
+    "peakSampledUsedMiB": 791,
+    "usedMiBAfterValidation": 791,
+    "gpuUtilizationAfterValidationPercent": 0,
+    "otherComputeProcessesObservedDuringActivation": false
+  },
+  "healthCommand": "docker exec task4-gpu /opt/task4/bin/python /runtime/check/health.py"
+}

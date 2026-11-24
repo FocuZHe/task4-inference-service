@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "shared.radar-plot/1.0",
+  "plotId": "plot-001",
+  "provenance": {
+    "source": "radar",
+    "deviceId": "radar-01",
+    "observedAt": "2026-10-27T02:00:00Z",
+    "receivedAt": "2026-10-27T02:00:00.050Z",
+    "dataQuality": "ok",
+    "timeQuality": "synchronized",
+    "deviceStatus": "ok"
+  },
+  "sessionId": "session-001",
+  "frameIndex": 15,
+  "rangeM": 640.0,
+  "azimuthDeg": 42.0,
+  "elevationDeg": 6.0,
+  "radialVelocityMps": -8.5,
+  "snrDb": 14.0,
+  "quality": 0.9,
+  "pointStatusFlags": 5,
+  "validity": "valid"
+}
