@@ -28,6 +28,16 @@ python3 /srv/task4/bin/smoke.py http://192.168.153.223:18781
 
 每个请求填写 `requestId`、`modelVersion`、`source` 和带时区的 `receivedAt`。检测默认推荐 `yolo11n-dut-new`，验收样例的 `source` 为 `eo`。批量接口收到 8 帧时使用一次 CUDA 合批推理。接口定义提供完整字段和约束。
 
+## 从 GitHub 获取模型
+
+克隆仓库后，在根目录执行以下命令。Git LFS 下载 `event-rf.joblib`，两个 ZIP 将 FP16 和 FP32 模型解压到 `artifacts/onnx/` 的原路径。
+
+```bash
+git lfs pull
+python -m zipfile -e artifacts/onnx/event-rf-v1-fp16.onnx.zip .
+python -m zipfile -e artifacts/onnx/event-rf-v1-fp32.onnx.zip .
+```
+
 ## 服务器文件
 
 | 路径（相对于 `/srv/task4`） | 内容 |
